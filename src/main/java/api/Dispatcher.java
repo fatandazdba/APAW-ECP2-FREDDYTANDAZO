@@ -30,11 +30,11 @@ public class Dispatcher {
                 case POST:
                     this.doPost(request, response);
                     break;
-               /* case GET:
-                    this.doGet(request, response);
-                    break;
                 case PUT:
                     this.doPut(request);
+                    break;
+               /* case GET:
+                    this.doGet(request, response);
                     break;
                 case PATCH:
                     this.doPatch(request);
@@ -81,17 +81,15 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-
+*/
     private void doPut(HttpRequest request) {
-        if (request.isEqualsPath(PersonaApiController.PERSONAS + PersonaApiController.ID_ID)) {
-            this.personaApiController.update(request.getPath(1), (PersonaDto) request.getBody());
-        }else if (request.isEqualsPath(cocheApiController.COCHES + CocheApiController.ID_ID)) {
+        if (request.isEqualsPath(cocheApiController.COCHES + CocheApiController.ID_ID)) {
             this.cocheApiController.update(request.getPath(1), (CocheDto) request.getBody());
         }else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-
+/*
     private void doPatch(HttpRequest request) {
         if (request.isEqualsPath(CocheApiController.COCHES + CocheApiController.ID_ID + CocheApiController.ACCESORIOS)) {
             String a="ee";

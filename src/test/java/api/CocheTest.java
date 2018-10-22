@@ -32,4 +32,29 @@ class CocheTest {
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
+
+    @Test
+    void testCreateCocheWithoutCocheDtoMarca() {
+        HttpRequest request = HttpRequest.builder(CocheApiController.COCHES).body(new CocheDto("9876 ERER",null,null, null)).post();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
+
+    @Test
+    void testUpdateCoche() {
+        String id = this.createCoche();
+        HttpRequest request = HttpRequest.builder(CocheApiController.COCHES).path(CocheApiController.ID_ID)
+                .expandPath(id).body(new CocheDto("5467 LLI","MITSUBIHI",true, "RIN_ACERO")).put();
+        assertEquals(HttpStatus.OK, new Client().submit(request).getStatus());
+    }
+
+    @Test
+    void testUpdateCocheWithoutCocheDto() {
+        String id = this.createCoche();
+        HttpRequest request = HttpRequest.builder(CocheApiController.COCHES).path(CocheApiController.ID_ID)
+                .expandPath(id).body(null).put();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
 }
