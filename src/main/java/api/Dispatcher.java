@@ -61,11 +61,9 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(CocheApiController.COCHES)) {
             response.setBody(this.cocheApiController.create((CocheDto) request.getBody()));
-        }/*else if (request.isEqualsPath(PersonaApiController.PERSONAS)) {
+        }else if (request.isEqualsPath(PersonaApiController.PERSONAS)) {
             response.setBody(this.personaApiController.create((PersonaDto) request.getBody()));
-        }else if (request.isEqualsPath(CocheApiController.COCHES)) {
-            response.setBody(this.cocheApiController.create((CocheDto) request.getBody()));
-        }else if (request.isEqualsPath(AlquilerApiController.ALQUILERS)) {
+        }/*else if (request.isEqualsPath(AlquilerApiController.ALQUILERS)) {
             response.setBody(this.alquilerApiController.create((AlquilerCreationDto) request.getBody()));
         } */else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
@@ -85,6 +83,8 @@ public class Dispatcher {
     private void doPut(HttpRequest request) {
         if (request.isEqualsPath(cocheApiController.COCHES + CocheApiController.ID_ID)) {
             this.cocheApiController.update(request.getPath(1), (CocheDto) request.getBody());
+        }else if (request.isEqualsPath(PersonaApiController.PERSONAS + PersonaApiController.ID_ID)) {
+            this.personaApiController.update(request.getPath(1), (PersonaDto) request.getBody());
         }else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
