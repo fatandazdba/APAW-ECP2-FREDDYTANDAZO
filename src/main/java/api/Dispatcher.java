@@ -33,12 +33,13 @@ public class Dispatcher {
                 case PUT:
                     this.doPut(request);
                     break;
-               /* case GET:
-                    this.doGet(request, response);
-                    break;
                 case PATCH:
                     this.doPatch(request);
                     break;
+               /* case GET:
+                    this.doGet(request, response);
+                    break;
+
                 case DELETE:
                     this.doDelete(request);
                     break;*/
@@ -89,7 +90,7 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-/*
+
     private void doPatch(HttpRequest request) {
         if (request.isEqualsPath(CocheApiController.COCHES + CocheApiController.ID_ID + CocheApiController.ACCESORIOS)) {
             String a="ee";
@@ -98,7 +99,7 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-
+/*
     private void doDelete(HttpRequest request) {
         if (request.isEqualsPath(AlquilerApiController.ALQUILERS + AlquilerApiController.ID_ID)) {
             this.alquilerApiController.delete(request.getPath(1));

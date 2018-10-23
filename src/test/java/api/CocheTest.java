@@ -57,4 +57,13 @@ class CocheTest {
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
+
+    @Test
+    void testUpdateAccesorios() {
+        String id = this.createCoche();
+        HttpRequest request = HttpRequest.builder(CocheApiController.COCHES).path(CocheApiController.ID_ID)
+                .expandPath(id).path(CocheApiController.ACCESORIOS).body(Accesorios.AMPLIFICADOR).patch();
+        new Client().submit(request);
+        assertEquals(HttpStatus.OK, new Client().submit(request).getStatus() );
+    }
 }
