@@ -1,1 +1,6 @@
 https://github.com/fatandazdba/APAW-ECP2-FREDDYTANDAZO
+
+https://travis-ci.org/fatandazdba/APAW-ECP2-FREDDYTANDAZO
+
+
+
