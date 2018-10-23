@@ -46,7 +46,7 @@ class AlquilerTest {
     }
 
     @Test
-    void testDelete() {
+    void testDeleteAlquiler() {
         String id = this.createAlquiler("Alquiler");
         HttpRequest request1 = HttpRequest.builder(AlquilerApiController.ALQUILERS).get();
         int count = ((List<AlquilerIdReferenceDto>) new Client().submit(request1).getBody()).size();
