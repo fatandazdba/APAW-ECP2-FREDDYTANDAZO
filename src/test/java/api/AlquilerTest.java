@@ -45,7 +45,14 @@ class AlquilerTest {
         assertTrue(themes.size() >= 5);
     }
 
-
-
-
+    @Test
+    void testDelete() {
+        String id = this.createAlquiler("Alquiler");
+        HttpRequest request1 = HttpRequest.builder(AlquilerApiController.ALQUILERS).get();
+        int count = ((List<AlquilerIdReferenceDto>) new Client().submit(request1).getBody()).size();
+        HttpRequest request2 = HttpRequest.builder(AlquilerApiController.ALQUILERS).path(AlquilerApiController.ID_ID)
+                .expandPath(id).delete();
+        new Client().submit(request2);
+        assertTrue(((List<AlquilerIdReferenceDto>) new Client().submit(request1).getBody()).size() < count);
+    }
 }
