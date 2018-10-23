@@ -66,4 +66,22 @@ class CocheTest {
         new Client().submit(request);
         assertEquals(HttpStatus.OK, new Client().submit(request).getStatus() );
     }
+
+    @Test
+    void testSearchAccesorio() {
+        String id = this.createCoche();
+        String id2 = this.createCoche();
+        HttpRequest request = HttpRequest.builder(CocheApiController.COCHES).path(CocheApiController.SEARCH)
+                .param("q", "RIN_ACERO").get();
+        List<CocheDto> coches = (List<CocheDto>) new Client().submit(request).getBody();
+        assertEquals(false,coches.isEmpty());
+    }
+
+    @Test
+    void testSearchCochesBadRequest() {
+        HttpRequest request = HttpRequest.builder(CocheApiController.COCHES).path(CocheApiController.SEARCH)
+                .param("q", "ALGUN_TEXTO").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
 }
