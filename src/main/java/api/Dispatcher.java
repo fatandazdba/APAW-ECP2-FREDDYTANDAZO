@@ -36,13 +36,12 @@ public class Dispatcher {
                 case PATCH:
                     this.doPatch(request);
                     break;
-               /* case GET:
+                case GET:
                     this.doGet(request, response);
                     break;
-
                 case DELETE:
                     this.doDelete(request);
-                    break;*/
+                    break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
             }
@@ -64,13 +63,13 @@ public class Dispatcher {
             response.setBody(this.cocheApiController.create((CocheDto) request.getBody()));
         }else if (request.isEqualsPath(PersonaApiController.PERSONAS)) {
             response.setBody(this.personaApiController.create((PersonaDto) request.getBody()));
-        }/*else if (request.isEqualsPath(AlquilerApiController.ALQUILERS)) {
+        }else if (request.isEqualsPath(AlquilerApiController.ALQUILERS)) {
             response.setBody(this.alquilerApiController.create((AlquilerCreationDto) request.getBody()));
-        } */else {
+        } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-/*
+
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(AlquilerApiController.ALQUILERS)) {
             response.setBody(this.alquilerApiController.readAll());
@@ -80,7 +79,7 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-*/
+
     private void doPut(HttpRequest request) {
         if (request.isEqualsPath(cocheApiController.COCHES + CocheApiController.ID_ID)) {
             this.cocheApiController.update(request.getPath(1), (CocheDto) request.getBody());
@@ -99,7 +98,7 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-/*
+
     private void doDelete(HttpRequest request) {
         if (request.isEqualsPath(AlquilerApiController.ALQUILERS + AlquilerApiController.ID_ID)) {
             this.alquilerApiController.delete(request.getPath(1));
@@ -107,5 +106,5 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
-*/
+
 }
