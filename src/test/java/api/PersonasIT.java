@@ -23,6 +23,19 @@ class PersonasIT {
         return (String) new Client().submit(request).getBody();
     }
 
+    @Test
+    void testCreatePersonaWithoutPersonaDto() {
+        HttpRequest request = HttpRequest.builder(PersonaApiController.PERSONAS).body(null).post();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
+    @Test
+    void testCreatePersonaWithoutPersonaDtoNombre() {
+        HttpRequest request = HttpRequest.builder(PersonaApiController.PERSONAS).body(new PersonaDto(null,"Díaz",0)).post();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
 
 
     @Test
